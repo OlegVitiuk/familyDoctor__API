@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import * as db from './utils/databaseUtils';
-import {serverPort} from '../etc/config';
+import * as db from './src/utils/databaseUtils';
+import {serverPort} from './etc/config';
 
 db.setUpConnection();
 

@@ -13,6 +13,6 @@
   "author": "Oleg Vitiuk",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon --exec babel-node --presets=es2015  -- src/app.js"
+    "server": "nodemon --exec babel-node --presets=es2015  -- src/index.js"
   }
 }

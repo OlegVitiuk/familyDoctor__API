@@ -26,7 +26,7 @@ app.use((err,req,res,next)=>{
     next();
 });
 
-const server = app.listen(process.env.PORT || 8080, () => {
+const server = app.listen(process.env.PORT || 8080, '0.0.0.0', () => {
     const port = server.address().port;
     console.log("App now running on port", port);
 });

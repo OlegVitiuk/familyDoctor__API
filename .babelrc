@@ -1,7 +1,7 @@
 {
   "presets": ["es2015"],
   "plugins": [
-    ["module-resolver", {
+    "transform-react-jsx-source",["module-resolver", {
       "root": ["./src"],
       "alias": {
         "@models": "./src/models",

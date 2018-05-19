@@ -1,11 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import * as db from './src/utils/databaseUtils';
-import {serverPort} from './etc/config';
-
-db.setUpConnection();
+//import {serverPort} from './src/config';
+import {router} from '@routes/api';
+import mongoose from 'mongoose';
 
 const app = express();
+
+//mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`);
+mongoose.connect('mongodb://test:1@ds117730.mlab.com:17730/diploma');
+mongoose.Promise = global.Promise;
+
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -15,16 +19,11 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/users', (req, res) => {
-    db.listOfUsers().then(data => res.send(data));
-});
+app.use(router);
 
-app.post('/users', (req, res) => {
-    db.createUser(req.body).then(data => res.send(data));
-});
-
-app.delete('/users/:id', (req, res) => {
-    db.deleteUser(req.params.id).then(data => res.send(data));
+app.use((err,req,res,next)=>{
+    res.status(422).send({error: err.message});
+    next();
 });
 
 const server = app.listen(process.env.PORT || 8080, () => {

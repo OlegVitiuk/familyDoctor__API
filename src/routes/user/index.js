@@ -1,19 +1,21 @@
 import User from "@models/User";
-import passport from 'passport';
 import {createUser} from "@utils/user";
-import LocalStrategy from 'passport-local';
-export const localStrategy = LocalStrategy.Strategy;
+import express from 'express';
 
-export const userRoutes = router =>{
-    router.get('/user', (req, res, next) => {
-        User.find().then(data => res.send(data)).catch(next);
-    });
+export const userRouter = express.Router();
 
-    router.post('/user', (req, res, next) => {
-        createUser(req.body).then(data => res.send(data)).catch(next);
-    });
+userRouter.get('/user', (req, res, next) => {
+    User.find().then(data => res.send(data)).catch(next);
+});
 
-    router.delete('/users/:id', (req, res, next) => {
-        User.findByIdAndRemove({_id: req.params.id}).remove().then(data => res.send(data)).catch(next);
-    });
-}
+userRouter.post('/register', (req, res, next) => {
+    createUser(req.body).then(data => res.send(data)).catch(next);
+});
+
+userRouter.post('/login', (req, res, next) => {
+    //createUser(req.body).then(data => res.send(data)).catch(next);
+});
+
+userRouter.delete('/delete/:id', (req, res, next) => {
+    User.findByIdAndRemove({_id: req.params.id}).remove().then(data => res.send(data)).catch(next);
+});

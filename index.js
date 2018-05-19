@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 //import {serverPort} from './src/config';
-import {router} from '@routes/api';
+import {userRouter} from '@routes/user';
 import mongoose from 'mongoose';
 
 const app = express();
@@ -19,10 +19,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(router);
+app.use('/user', userRouter);
 
 app.use((err,req,res,next)=>{
-    res.status(422).send({error: err.message});
+    res.status(400).send({error: err.message});
     next();
 });
 

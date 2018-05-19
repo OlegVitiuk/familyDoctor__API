@@ -1,5 +1,6 @@
 import User from "@models/User";
 import passport from 'passport';
+import {createUser} from "@utils/user";
 import LocalStrategy from 'passport-local';
 export const localStrategy = LocalStrategy.Strategy;
 
@@ -8,8 +9,8 @@ export const userRoutes = router =>{
         User.find().then(data => res.send(data)).catch(next);
     });
 
-    router.post('/users', (req, res, next) => {
-        User.create(req.body).then(data => res.send(data)).catch(next);
+    router.post('/user', (req, res, next) => {
+        createUser(req.body).then(data => res.send(data)).catch(next);
     });
 
     router.delete('/users/:id', (req, res, next) => {

@@ -12,6 +12,7 @@ mongoose.Promise = global.Promise;
 
 app.use(bodyParser.json());
 
+
 app.use((req, res, next) => {
     bodyParser.json();
     res.header("Access-Control-Allow-Origin", "*");
@@ -26,7 +27,7 @@ app.use((err,req,res,next)=>{
     next();
 });
 
-const server = app.listen(process.env.PORT || 8080, '0.0.0.0', () => {
+const server = app.listen(process.env.PORT || 8080, () => {
     const port = server.address().port;
     console.log("App now running on port", port);
 });

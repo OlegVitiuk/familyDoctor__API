@@ -15,7 +15,10 @@
   "author": "Oleg Vitiuk",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon --exec babel-node --presets=es2015  -- index.js"
+    "dev": "nodemon -w src --exec babel-node src",
+    "build": "babel src -s -D -d dist",
+    "prestart": "npm run -s build",
+    "start": "node dist"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1",

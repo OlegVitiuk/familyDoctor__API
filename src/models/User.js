@@ -6,35 +6,35 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     name: {
         type: String,
-        required: [true, "field is required"]
+        required: [true, "name is required"]
     },
     surname: {
         type: String,
-        required: [true, "field is required"]
+        required: [true, "surname is required"]
     },
     birthday: {
         type: String,
-        required: [true, "field is required"]
+        required: [true, "birthday is required"]
     },
     email: {
         type: String,
         unique : true,
-        required: [true, "field is required"]
+        required: [true, "email is required"]
     },
     password: {
         type: String,
-        required: [true, "field is required"]
+        required: [true, "password is required"]
     },
     telephone: {
         type: String,
-        required: [true, "field is required"]
+        required: [true, "telephone is required"]
     }
 }, {collection: 'Users'});
 
 const User = mongoose.model('User', UserSchema);
 
 UserSchema.pre('save', function(next){
-    var user = this;
+    let user = this;
     if (!user.isModified('password')) return next();
 
     bcrypt.genSalt(10, function(err, salt){

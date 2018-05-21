@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 
 import {doctorRouter} from "@routes/doctor";
 import {userRouter} from '@routes/user';
+import {clinicRouter} from '@routes/clinic';
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 
 app.use('/user', userRouter);
 app.use('/doctors', doctorRouter);
+app.use('/clinics', clinicRouter);
 
 app.use((err,req,res,next)=>{
     res.status(400).send({error: err.message});

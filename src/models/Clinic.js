@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const workTimeSchema = new Schema({
+const workTime = {
     start: {
         type: String,
         required: [true, "start is required"],
@@ -11,7 +11,7 @@ const workTimeSchema = new Schema({
         type: String,
         required: [true, "end is required"]
     }
-});
+};
 
 const ClinicSchema = new Schema({
     name: {
@@ -40,10 +40,10 @@ const ClinicSchema = new Schema({
     site: {
         type: String,
     },
-    schedule: new Schema({
-        weekdays: workTimeSchema,
-        weekends: workTimeSchema
-    }),
+    schedule: {
+        weekdays: workTime,
+        weekends: workTime
+    },
     records: [{
         clientId: {
             type: Schema.Types.ObjectId,
@@ -62,7 +62,7 @@ const ClinicSchema = new Schema({
             required: [true, "date is required"]
         }
     }],
-    adress: new Schema({
+    adress: {
         street: {
             type: String,
             required: [true, "street is required"]
@@ -71,7 +71,7 @@ const ClinicSchema = new Schema({
             type: String,
             required: [true, "metro is required"]
         }
-    }),
+    },
     reviews: [{
         author: {
             type: Schema.Types.ObjectId,

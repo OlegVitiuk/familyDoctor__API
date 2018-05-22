@@ -1,6 +1,8 @@
 import User from "@models/User";
 import express from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import config from '@utils/config';
 
 export const userRouter = express.Router();
 
@@ -10,10 +12,14 @@ userRouter.post('/login', (req, res, next) => {
     User.findOne({email: email}).then(user => {
         if (user) {
             bcrypt.compare(password, user.password).then(rezult => {
-                if(rezult){
-                    res.status(401).send({error: "ok!"});
+                if (rezult) {
+                    const token = jwt.sign({
+                        id: user._id,
+                        email: user.email
+                    }, config.jwtSecret);
+                    res.send({token})
                     next();
-                } else{
+                } else {
                     res.status(401).send({error: "Invalid password!"});
                     next();
                 }
@@ -23,10 +29,6 @@ userRouter.post('/login', (req, res, next) => {
             next();
         }
     });
-});
-
-userRouter.get('/user', (req, res, next) => {
-    User.find().then(data => res.send(data)).catch(next);
 });
 
 userRouter.post('/register', (req, res, next) => {

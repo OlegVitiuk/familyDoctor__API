@@ -25,6 +25,12 @@ const DoctorSchema = new Schema({
     rating: {
         type: Number
     },
+    records: {
+        type: Object,
+        additionalProperties: {
+            type: [{type: String}]
+        }
+    },
     clinics: [{
         type: Schema.Types.ObjectId
     }],

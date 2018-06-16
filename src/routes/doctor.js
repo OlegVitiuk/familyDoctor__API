@@ -3,13 +3,8 @@ import Doctor from "@models/Doctor";
 import User from "@models/User";
 import config from '@utils/config';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
 
 export const doctorRouter = express.Router();
-
-const getCorrectFormatForDate = (date) => {
-    return date.split('.').join('_');
-}
 
 doctorRouter.get('/getAll', (req, res, next) => {
     Doctor.find().then(data => res.send(data)).catch(next);
@@ -18,8 +13,13 @@ doctorRouter.get('/getAll', (req, res, next) => {
 doctorRouter.post('/getAppoinments', (req, res, next) => {
     const {date, id} = req.body;
     Doctor.findById(id).then(data => {
-        const timeSheet = data.records.map((item) => item.date === date ? item.time : null);
-        res.status(200).send(timeSheet);
+        let timeSheetByDate = [];
+        data.records.forEach((item) => {
+            if (item.date === date) {
+                timeSheetByDate = timeSheetByDate.concat(item.time)
+            }
+        });
+        res.status(200).send(timeSheetByDate);
     }).catch(next);
 });
 

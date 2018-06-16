@@ -28,7 +28,25 @@ const UserSchema = new Schema({
     telephone: {
         type: String,
         required: [true, "telephone is required"]
-    }
+    },
+    records: [{
+        clinicId: {
+            type: Schema.Types.ObjectId,
+            required: [true, "clientId is required"]
+        },
+        doctorId: {
+            type: Schema.Types.ObjectId,
+            required: [true, "doctorId is required"]
+        },
+        time: [{
+            type: String,
+            required: [true, "time is required"]
+        }],
+        date: {
+            type: String,
+            required: [true, "date is required"]
+        }
+    }],
 }, {collection: 'Users'});
 
 const User = mongoose.model('User', UserSchema);

@@ -3,44 +3,58 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const DoctorSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, "name is required"]
+        name: {
+            type: String,
+            required: [true, "name is required"]
+        },
+        surname: {
+            type: String,
+            required: [true, "surname is required"]
+        },
+        middleName: {
+            type: String,
+            required: [true, "middleName is required"]
+        },
+        type: [{type: String, required: [true, "type is required"]}],
+        photo: {
+            type: String
+        },
+        price: {
+            type: Number
+        },
+        rating: {
+            type: Number
+        },
+        records: [
+            {
+                date: {
+                    type: String,
+                    required: [true, "date is required"]
+                },
+                time: [{
+                    type: String,
+                    required: [true, "time is required"]
+                }]
+
+            }
+        ],
+        clinics: [{
+            type: Schema.Types.ObjectId
+        }],
+        laboratories:
+            [{
+                type: Schema.Types.ObjectId
+            }],
+        diagnosticCenters:
+            [{
+                type: Schema.Types.ObjectId
+            }]
     },
-    surname: {
-        type: String,
-        required: [true, "surname is required"]
-    },
-    middleName: {
-        type: String,
-        required: [true, "middleName is required"]
-    },
-    type: [{type: String,required: [true, "type is required"]}],
-    photo: {
-        type: String
-    },
-    price: {
-        type: Number
-    },
-    rating: {
-        type: Number
-    },
-    records: {
-        type: Object,
-        additionalProperties: {
-            type: [{type: String}]
-        }
-    },
-    clinics: [{
-        type: Schema.Types.ObjectId
-    }],
-    laboratories: [{
-        type: Schema.Types.ObjectId
-    }],
-    diagnosticCenters: [{
-        type: Schema.Types.ObjectId
-    }]
-}, {collection: 'Doctors'});
+    {
+        collection: 'Doctors'
+    }
+    )
+;
 
 const Doctor = mongoose.model('Doctor', DoctorSchema);
 

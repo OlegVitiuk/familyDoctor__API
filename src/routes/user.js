@@ -17,7 +17,7 @@ userRouter.post('/login', (req, res, next) => {
                         id: user._id,
                         email: user.email
                     }, config.jwtSecret);
-                    res.send({token})
+                    res.send({token});
                     next();
                 } else {
                     res.status(401).send({error: "Invalid password!"});
@@ -40,4 +40,17 @@ userRouter.post('/register', (req, res, next) => {
 
 userRouter.delete('/delete/:id', (req, res, next) => {
     User.findByIdAndRemove({_id: req.params.id}).remove().then(data => res.send(data)).catch(next);
+});
+
+userRouter.post('/getUser', (req, res, next) => {
+    const {token} = req.body;
+    if (token && jwt.verify(token, config.jwtSecret)) {
+        const userCredentials = jwt.decode(token);
+        User.findOne({email: userCredentials.email}).then((user) => {
+            res.status(200).send({user});
+        }).catch(next);
+    } else {
+        res.status(403).send({"error": "User is not authorized!"});
+        next();
+    }
 });

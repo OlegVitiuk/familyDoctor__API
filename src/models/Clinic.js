@@ -28,7 +28,14 @@ const ClinicSchema = new Schema({
         type: String
     },
     infrastructure: [{
-        type: String
+        name: {
+            type: String,
+            required: [true, "name of infrastructure service is required"]
+        },
+        link: {
+            type: String,
+            required: [true, "link of infrastructure service is required"]
+        }
     }],
     description: {
         type: String

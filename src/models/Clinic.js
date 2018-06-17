@@ -77,6 +77,14 @@ const ClinicSchema = new Schema({
         metro: {
             type: String,
             required: [true, "metro is required"]
+        },
+        region: {
+            type: String,
+            required: [true, "region is required"]
+        },
+        city: {
+            type: String,
+            required: [true, "city is required"]
         }
     },
     reviews: [{

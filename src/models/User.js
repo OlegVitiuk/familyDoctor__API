@@ -12,7 +12,7 @@ const UserSchema = new Schema({
         type: String,
         required: [true, "surname is required"]
     },
-    fathersName: {
+    middleName: {
         type: String,
         required: [true, "fathersName is required"]
     },

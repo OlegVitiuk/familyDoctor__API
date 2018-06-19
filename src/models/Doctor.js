@@ -25,6 +25,36 @@ const DoctorSchema = new Schema({
         rating: {
             type: Number
         },
+        experience: {
+            type: Number
+        },
+        status: {
+            type: String
+        },
+        reviews: [{
+            date: {
+                type: String,
+                required: [true, "review date is required"]
+            },
+            text: {
+                type: String,
+                required: [true, "review text is required"]
+            },
+            rating: {
+                qualification: {
+                    type: Number,
+                    required: [true, "review rating is required"]
+                },
+                price: {
+                    type: Number,
+                    required: [true, "review rating is required"]
+                },
+                attention: {
+                    type: Number,
+                    required: [true, "review attention is required"]
+                },
+            },
+        }],
         records: [
             {
                 date: {
